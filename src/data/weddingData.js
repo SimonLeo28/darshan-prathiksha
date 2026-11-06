@@ -1,0 +1,45 @@
+export const weddingData = {
+  blessing: 'With Divine Blessings',
+  brideName: 'Darshan M',
+  groomName: 'Prathiksha Gowda',
+  brideFamily: 'Together with their families',
+  groomFamily: 'Together with their families',
+  weddingDate: '2026-11-16T09:00:00+05:30',
+  receptionDate: '2026-11-16T11:30:00+05:30',
+  weddingLabel: 'Muhurtham',
+  venueName: 'Shree Chamundeshwari Kalyana Mantapa',
+  venueAddress: 'Venue: Shree Chamundeshwari Kalyana Mantapa',
+  venueMapsUrl: 'https://maps.google.com/?q=Shree+Chamundeshwari+Kalyana+Mantapa',
+  invitationHeadline: 'Together with their families',
+  invitationText: [
+    'We cordially invite you to join the occasion of their joyous commitment on',
+    'Date: 16th November 2026',
+    'Muhurtham: 9:00 AM to 10:00 AM',
+    'Reception: 11:30 AM onwards',
+    'With love, blessings and warm wishes from both families.',
+  ],
+  familyMessage:
+    'We request the honour of your presence and blessings as we celebrate this joyful beginning together.',
+  eventList: [
+    {
+      name: 'Muhurtham',
+      date: '16th November 2026',
+      day: 'Monday',
+      time: '9:00 AM to 10:00 AM',
+      venue: 'Shree Chamundeshwari Kalyana Mantapa',
+      note: 'The sacred wedding ceremony begins with the auspicious Muhurtham.',
+    },
+    {
+      name: 'Reception',
+      date: '16th November 2026',
+      day: 'Monday',
+      time: '11:30 AM onwards',
+      venue: 'Shree Chamundeshwari Kalyana Mantapa',
+      note: 'Join us for a joyful celebration and blessings from family and friends.',
+    },
+  ],
+  galleryImages: [],
+  footerNote: 'Your presence and blessings mean the world to us.',
+  sourceNote:
+    'Wedding details updated from the latest invitation reference received for the ceremony and reception timings.',
+};
