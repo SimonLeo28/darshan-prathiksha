@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { weddingData } from '../data/weddingData';
 
 const Gallery = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const touchStartRef = useRef(null);
   const images = weddingData.galleryImages;
 
   const openLightbox = (index) => setSelectedIndex(index);
@@ -13,11 +14,32 @@ const Gallery = () => {
   const showNext = () =>
     setSelectedIndex((current) => (current === images.length - 1 ? 0 : current + 1));
 
+  const handleTouchStart = (event) => {
+    touchStartRef.current = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartRef.current === null) return;
+
+    const endX = event.changedTouches[0].clientX;
+    const delta = endX - touchStartRef.current;
+
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) {
+        showNext();
+      } else {
+        showPrevious();
+      }
+    }
+
+    touchStartRef.current = null;
+  };
+
   return (
-    <section className="section-shell gallery-section">
+    <section className="section-shell gallery-section" id="gallery">
       <div className="section-heading center">
         <span className="section-tag">Invitation Gallery</span>
-        <h2>Original invites</h2>
+        <h2>Our treasured keepsakes</h2>
       </div>
 
       <div className="gallery-grid">
@@ -25,7 +47,7 @@ const Gallery = () => {
           <button
             type="button"
             className="gallery-item"
-            key={image.src}
+            key={`${image.src}-${index}`}
             onClick={() => openLightbox(index)}
             aria-label={`Open ${image.alt}`}
           >
@@ -37,7 +59,12 @@ const Gallery = () => {
 
       {selectedIndex !== null && (
         <div className="lightbox" onClick={closeLightbox} role="dialog" aria-modal="true">
-          <div className="lightbox__content" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="lightbox__content"
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <button className="lightbox__close" onClick={closeLightbox} aria-label="Close gallery">
               <X size={18} />
             </button>

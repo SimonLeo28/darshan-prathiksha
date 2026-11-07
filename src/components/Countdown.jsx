@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { weddingData } from '../data/weddingData';
 
 const calculateTimeLeft = (targetDate) => {
-  const difference = new Date(targetDate).getTime() - new Date().getTime();
+  const difference = new Date(targetDate).getTime() - Date.now();
 
   if (difference <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isComplete: true };
@@ -18,14 +18,14 @@ const calculateTimeLeft = (targetDate) => {
 };
 
 const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(weddingData.weddingDate));
+  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(weddingData.weddingDate));
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       setTimeLeft(calculateTimeLeft(weddingData.weddingDate));
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => window.clearInterval(timer);
   }, []);
 
   if (timeLeft.isComplete) {
@@ -40,27 +40,27 @@ const Countdown = () => {
   }
 
   return (
-    <section className="section-shell countdown-section">
+    <section className="section-shell countdown-section" id="countdown">
       <div className="section-heading center">
         <span className="section-tag">Countdown</span>
-        <h2>We can’t wait to celebrate</h2>
+        <h2>Counting Down to Forever</h2>
       </div>
 
-      <div className="countdown-grid">
+      <div className="countdown-grid" aria-live="polite">
         <div className="countdown-item">
-          <span>{timeLeft.days}</span>
+          <span>{String(timeLeft.days).padStart(2, '0')}</span>
           <label>Days</label>
         </div>
         <div className="countdown-item">
-          <span>{timeLeft.hours}</span>
+          <span>{String(timeLeft.hours).padStart(2, '0')}</span>
           <label>Hours</label>
         </div>
         <div className="countdown-item">
-          <span>{timeLeft.minutes}</span>
+          <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
           <label>Minutes</label>
         </div>
         <div className="countdown-item">
-          <span>{timeLeft.seconds}</span>
+          <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
           <label>Seconds</label>
         </div>
       </div>

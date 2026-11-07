@@ -1,9 +1,9 @@
 import { Sparkles } from 'lucide-react';
 import { weddingData } from '../data/weddingData';
 
-const Hero = ({ onOpenInvitation }) => {
+const Hero = () => {
   return (
-    <header className="hero section-shell">
+    <header className="hero section-shell" id="welcome">
       <div className="hero__ornaments hero__ornaments--left" aria-hidden="true" />
       <div className="hero__ornaments hero__ornaments--right" aria-hidden="true" />
 
@@ -13,15 +13,17 @@ const Hero = ({ onOpenInvitation }) => {
         </div>
 
         <div className="hero__title-wrap">
-          <p className="eyebrow">A grand celebration of love</p>
-          <h1 className="hero__title">{weddingData.brideName} <span>&</span> {weddingData.groomName}</h1>
+          <p className="eyebrow hero__eyebrow">A GRAND CELEBRATION</p>
+          <h1 className="hero__title">
+            {weddingData.groomName} <span>&</span> {weddingData.brideName}
+          </h1>
           <p className="hero__date">16 November 2026</p>
         </div>
 
-        <button className="cta-button" onClick={onOpenInvitation}>
+        <a className="cta-button" href="#invitation" aria-label="Scroll to wedding invitation">
           <Sparkles size={18} />
           Open Wedding Invitation
-        </button>
+        </a>
       </div>
     </header>
   );
